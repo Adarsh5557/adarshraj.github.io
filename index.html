@@ -9,16 +9,16 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg: #0a0b0d;
-      --green: #00cc66;
-      --green-dim: #009944;
-      --green-glow: rgba(0, 204, 102, 0.15);
-      --yellow: #ffff66;
-      --cyan: #66ffff;
-      --gray: #666677;
-      --text: #ccccbb;
-      --dim: #44445a;
-      --border: #1a1a2e;
+      --bg: #f7f7f5;
+      --green: #1a7a4a;
+      --green-dim: #2a9965;
+      --green-glow: rgba(26, 122, 74, 0.07);
+      --yellow: #7a6a20;
+      --cyan: #2a6688;
+      --gray: #999990;
+      --text: #2a2a28;
+      --dim: #bbbbaa;
+      --border: #e0e0d8;
       --font: 'Source Code Pro', monospace;
     }
 
@@ -34,20 +34,23 @@
     }
 
     #starfield {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
+      display: none; /* hidden on light theme */
     }
 
-    body::after {
+    /* Dot grid — matches reference image exactly */
+    body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+      background-image: radial-gradient(circle, #c8c8c0 1px, transparent 1px);
+      background-size: 24px 24px;
       pointer-events: none;
-      z-index: 998;
+      z-index: 0;
+      opacity: 0.7;
     }
+
+    /* No scanlines on light theme */
+    body::after { display: none; }
 
     .wrap {
       position: relative;
@@ -62,7 +65,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(10, 11, 13, 0.92);
+      background: rgba(247, 247, 245, 0.93);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
       padding: 0.9rem 0;
@@ -86,7 +89,7 @@
     .hero-pre { color: var(--gray); font-size: 0.78rem; margin-bottom: 1.5rem; letter-spacing: 0.05em; }
     .hero-pre .prompt { color: var(--green); }
 
-    .hero-name { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 700; color: #ffffff; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.4rem; }
+    .hero-name { font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 700; color: #1a1a18; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.4rem; }
     .hero-name .accent { color: var(--green); }
 
     .hero-role { font-size: 0.9rem; color: var(--yellow); margin-bottom: 2rem; letter-spacing: 0.08em; }
@@ -110,7 +113,7 @@
 
     .sec-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2.5rem; }
     .sec-num { color: var(--green); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; }
-    .sec-title { color: #ffffff; font-size: 1.3rem; font-weight: 700; letter-spacing: 0.03em; }
+    .sec-title { color: #1a1a18; font-size: 1.3rem; font-weight: 700; letter-spacing: 0.03em; }
     .sec-line { flex: 1; height: 1px; background: var(--border); margin-left: 0.5rem; }
 
     /* ABOUT */
@@ -119,7 +122,7 @@
     .about-text .hl { color: var(--green); }
     .about-text .hl2 { color: var(--yellow); }
 
-    .about-card { border: 1px solid var(--border); background: rgba(255,255,255,0.015); }
+    .about-card { border: 1px solid var(--border); background: rgba(255,255,255,0.7); }
     .about-card-row { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 1.1rem; border-bottom: 1px solid var(--border); font-size: 0.75rem; }
     .about-card-row:last-child { border-bottom: none; }
     .about-card-key { color: var(--gray); }
@@ -127,8 +130,8 @@
 
     /* SKILLS */
     .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-    .skill-item { background: var(--bg); padding: 1.8rem; transition: background 0.15s; }
-    .skill-item:hover { background: rgba(0,204,102,0.04); }
+    .skill-item { background: rgba(255,255,255,0.8); padding: 1.8rem; transition: background 0.15s; }
+    .skill-item:hover { background: rgba(255,255,255,1); }
     .skill-head { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem; }
     .skill-icon { font-size: 1.1rem; }
     .skill-name { color: var(--yellow); font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
@@ -140,11 +143,11 @@
 
     /* PROJECTS */
     .projects-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
-    .project-item { background: var(--bg); padding: 1.8rem 2rem; display: flex; gap: 2rem; align-items: flex-start; transition: background 0.15s; }
-    .project-item:hover { background: rgba(0,204,102,0.03); }
+    .project-item { background: rgba(255,255,255,0.8); padding: 1.8rem 2rem; display: flex; gap: 2rem; align-items: flex-start; transition: background 0.15s; }
+    .project-item:hover { background: rgba(255,255,255,1); }
     .project-idx { color: var(--dim); font-size: 0.72rem; min-width: 30px; padding-top: 0.1rem; }
     .project-body { flex: 1; }
-    .project-title { color: #ffffff; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .project-title { color: #1a1a18; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.4rem; }
     .project-empty-msg { color: var(--dim); font-size: 0.75rem; font-style: italic; margin-top: 0.3rem; }
     .project-empty-msg::before { content: '// '; }
 
@@ -354,7 +357,7 @@
 (function() {
   const canvas = document.getElementById('starfield');
   const ctx = canvas.getContext('2d');
-  let stars = [];
+  let stars = [], shootingStars = [];
 
   function resize() {
     canvas.width  = window.innerWidth;
@@ -363,30 +366,66 @@
 
   function initStars() {
     stars = [];
-    const n = Math.floor((canvas.width * canvas.height) / 3500);
+    const n = Math.floor((canvas.width * canvas.height) / 4200);
     for (let i = 0; i < n; i++) {
       stars.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 1.2 + 0.2,
-        o: Math.random() * 0.55 + 0.1,
-        speed: Math.random() * 0.015 + 0.003,
+        r: Math.random() * 0.9 + 0.1,
+        o: Math.random() * 0.25 + 0.04,   // much dimmer
+        speed: Math.random() * 0.008 + 0.002,
         phase: Math.random() * Math.PI * 2,
       });
     }
   }
 
+  function spawnShootingStar() {
+    shootingStars.push({
+      x: Math.random() * canvas.width * 0.7,
+      y: Math.random() * canvas.height * 0.4,
+      len: Math.random() * 120 + 60,
+      speed: Math.random() * 6 + 4,
+      angle: Math.PI / 5,
+      alpha: 0.6,
+      fade: Math.random() * 0.012 + 0.008,
+      dx: 0, dy: 0,
+    });
+  }
+
+  setInterval(() => { if (Math.random() < 0.4) spawnShootingStar(); }, 3500);
+
   let frame = 0;
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     frame++;
+
+    // Stars
     stars.forEach(s => {
-      const flicker = s.o + Math.sin(frame * s.speed + s.phase) * 0.1;
+      const flicker = s.o + Math.sin(frame * s.speed + s.phase) * 0.05;
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(180, 220, 200, ${Math.max(0, flicker)})`;
+      ctx.fillStyle = `rgba(200, 215, 230, ${Math.max(0, flicker)})`;
       ctx.fill();
     });
+
+    // Shooting stars
+    shootingStars = shootingStars.filter(s => s.alpha > 0);
+    shootingStars.forEach(s => {
+      s.dx += Math.cos(s.angle) * s.speed;
+      s.dy += Math.sin(s.angle) * s.speed;
+      s.alpha -= s.fade;
+
+      const grad = ctx.createLinearGradient(s.x + s.dx, s.y + s.dy, s.x + s.dx - Math.cos(s.angle) * s.len, s.y + s.dy - Math.sin(s.angle) * s.len);
+      grad.addColorStop(0, `rgba(180, 240, 210, ${s.alpha})`);
+      grad.addColorStop(1, `rgba(180, 240, 210, 0)`);
+      ctx.beginPath();
+      ctx.moveTo(s.x + s.dx, s.y + s.dy);
+      ctx.lineTo(s.x + s.dx - Math.cos(s.angle) * s.len, s.y + s.dy - Math.sin(s.angle) * s.len);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+    });
+
     requestAnimationFrame(draw);
   }
 
